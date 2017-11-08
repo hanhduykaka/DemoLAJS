@@ -1,1 +1,376 @@
+<div class="header-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="user-menu">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa fa-user"></i> My Account</a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-heart"></i> Wishlist</a>
+            </li>
+            <li>
+              <a href="assets/html/cart.html">
+                <i class="fa fa-user"></i> My Cart</a>
+            </li>
+            <li>
+              <a href="assets/html/checkout.html">
+                <i class="fa fa-user"></i> Checkout</a>
+            </li>
+            <li>
+              <a *ngIf="!ten_dang_nhap_hien_thi" data-toggle="modal" data-target="#modalDangKy">
+                <i class="fa fa-user"></i> Đăng ký
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a *ngIf="!ten_dang_nhap_hien_thi" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-user"></i> Đăng nhập
+              </a>
 
+              <a *ngIf="ten_dang_nhap_hien_thi" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{ten_dang_nhap_hien_thi}}
+                <b class="caret"></b>
+              </a>
+              <div *ngIf="ten_dang_nhap_hien_thi" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                <a class="dropdown-item" data-toggle="modal" data-target="#modalDoiMatKhau">Đổi mật khẩu</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="fnLogOut()">Đăng xuất</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="header-right">
+          <ul class="list-unstyled list-inline">
+            <li class="dropdown dropdown-small">
+              <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">
+                <span class="key">currency :</span>
+                <span class="value">USD </span>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">USD</a>
+                </li>
+                <li>
+                  <a href="#">INR</a>
+                </li>
+                <li>
+                  <a href="#">GBP</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="dropdown dropdown-small">
+              <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">
+                <span class="key">language :</span>
+                <span class="value">English </span>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">English</a>
+                </li>
+                <li>
+                  <a href="#">French</a>
+                </li>
+                <li>
+                  <a href="#">German</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End header area -->
+
+<!-- Modal đăng nhập-->
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h4>
+          <span class="glyphicon glyphicon-lock"></span> Đăng nhập</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label for="usrname">
+              <span class="glyphicon glyphicon-user"></span> Tên đăng nhập</label>
+            <input #ten_dang_nhap type="text" class="form-control" name="ten_dang_nhap" id="ten_dang_nhap" placeholder="Tên đăng nhập">
+          </div>
+          <div class="form-group">
+            <label for="psw">
+              <span class="glyphicon glyphicon-eye-open"></span> Mật khẩu</label>
+            <input #mat_khau type="password" class="form-control" name="mat_khau" id="mat_khau" placeholder="Mật khẩu">
+          </div>
+          <button type="button" (click)="dang_nhap(ten_dang_nhap, mat_khau)" class="btn btn-success btn-block">
+            <span class="glyphicon glyphicon-off"></span> Đăng nhập</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove"></span> Thoát</button>
+        <p>Bạn chưa là thành viên?
+          <a href="">Đăng ký</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end đăng nhập-->
+
+
+<!-- Modal đổi mật khẩu-->
+<div id="modalDoiMatKhau" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Đổi mật khẩu</h4>
+      </div>
+      <div class="modal-body form-horizontal">
+        <div class="control-group">
+          <label for="current_password" class="control-label">Mật khẩu hiện tại</label>
+          <div class="controls">
+            <input type="password" class="form-control" name="current_password" placeholder="Nhập mật khẩu hiện tại">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="new_password" class="control-label">Mật khẩu mới</label>
+          <div class="controls">
+            <input type="password" class="form-control" name="new_password" placeholder="Nhập mật khẩu mới">
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="confirm_password" class="control-label">Nhập lại mật khẩu</label>
+          <div class="controls">
+            <input type="password" class="form-control" name="confirm_password" placeholder="Nhập lại mật khẩu mới">
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Đổi</button>
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end đổi mật khẩu-->
+
+
+<!-- Modal Đăng ký-->
+<div id="modalDangKy" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Đăng ký</h4>
+      </div>
+      <div class="modal-body form-horizontal">
+        <div>
+          <form *ngIf="!submited" class="form-horizontal" role="form" #form_dang_ky="ngForm">
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Họ tên:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" #ho_ten="ngModel" [(ngModel)]="nguoi_dung.ho_ten" name="ho_ten" class="form-control" value="" required="required"
+                  title="">
+                <div class="thong_bao_loi" *ngIf="ho_ten.invalid && !ho_ten.pristine">
+                  <div *ngIf="ho_ten.errors.required">
+                    Vui lòng nhập họ tên
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Tài khoản:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" #ten_tai_khoan="ngModel" [(ngModel)]="nguoi_dung.ten_tai_khoan" name="ten_tai_khoan" class="form-control"
+                  value="" required="required" pattern="^[a-zA-Z0-9]+$" title="">
+
+                <div class="thong_bao_loi" *ngIf="ten_tai_khoan.invalid && !ten_tai_khoan.pristine">
+                  <div *ngIf="ten_tai_khoan.errors.required">
+                    Vui lòng nhập tai khoan
+                  </div>
+                  <div *ngIf="ten_tai_khoan.errors.pattern">
+                    Tai khoan khong hop le
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Mật khẩu:</label>
+              </div>
+              <div class="col-sm-9">
+                <!-- validateEqual="nhap_lai_mat_khau_input" -->
+                <input type="password" class="form-control" name="mat_khau" [(ngModel)]="nguoi_dung.mat_khau" #mat_khau="ngModel" validateEqual="re_mat_khau"
+                  required reverse="true">
+                <div class="thong_bao_loi" [hidden]="mat_khau.valid || (mat_khau.pristine && !form_dang_ky.submitted)">
+                  Vui lòng nhập Password!
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Nhập lại mật khẩu:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" name="re_mat_khau" [(ngModel)]="nguoi_dung.re_mat_khau" required validateEqual="mat_khau"
+                  reverse="false" #re_mat_khau="ngModel">
+                <div class="thong_bao_loi" [hidden]="re_mat_khau.valid || (re_mat_khau.pristine && !form_dang_ky.submitted)">
+                  Password và Confirm Password phải giống nhau!
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Email:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="email" #email="ngModel" pattern="[a-zA-Z0-9\.\+_-]+@\S+\.\S+" [(ngModel)]="nguoi_dung.email" name="email" class="form-control"
+                  value="" required="required" title="">
+                <div class="thong_bao_loi" *ngIf="email.invalid && !email.pristine">
+                  <div *ngIf="email.errors.required">
+                    Vui lòng nhập email
+                  </div>
+                  <div *ngIf="email.errors.pattern">
+                    Email không hợp lệ!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Tuổi:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="number" min=1 max=150 #ngay_sinh="ngModel" kiemtratuoi="ngay_sinh" [(ngModel)]="nguoi_dung.ngay_sinh" name="ngay_sinh"
+                  class="form-control" value="" title="">
+                <div class="thong_bao_loi" *ngIf="ngay_sinh.invalid && !ngay_sinh.pristine">
+                  <div *ngIf="ngay_sinh.errors.kiemtratuoi">
+                    Tuổi không được lớn hơn 150!
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Nơi sinh:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" [(ngModel)]="nguoi_dung.noi_sinh" name="noi_sinh" class="form-control" value="" required="required" pattern=""
+                  title="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">CMND:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" #cmnd="ngModel" maxlength="20" [(ngModel)]="nguoi_dung.cmnd" name="cmnd" class="form-control" value=""
+                  pattern="[0-9]+" title="">
+                <div class="thong_bao_loi" *ngIf="cmnd.invalid && !cmnd.pristine">
+                  <div *ngIf="cmnd.errors.pattern">
+                    CMND chỉ bao gồm số
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Số điện thoại:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" maxlength="20" #so_dien_thoai="ngModel" [(ngModel)]="nguoi_dung.so_dien_thoai" name="dien_thoai" class="form-control"
+                  value="" required="required" pattern="[0-9]+" title="">
+                <div class="thong_bao_loi" *ngIf="so_dien_thoai.invalid && !so_dien_thoai.pristine">
+                  <div *ngIf="so_dien_thoai.errors.pattern">
+                    Số điện thoại chỉ bao gồm số
+                  </div>
+                  <div *ngIf="so_dien_thoai.errors.required">
+                    Vui lòng nhập số điện thoại
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3">
+                <label class="pull-right">Địa chỉ:</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" #dia_chi="ngModel" [(ngModel)]="nguoi_dung.dia_chi" name="dia_chi" class="form-control" value="" title="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-3 col-sm-offset-3">
+                <button type="submit" (click)="gui_form(form_dang_ky)" [disabled]="form_dang_ky.form.invalid" class="btn btn-primary">Đăng ký</button>
+              </div>
+              <div class="col-sm-3 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </form>
+
+          <div *ngIf="submited" class="col-sm-12">
+            <div class="col-md-6">
+              <h1>Thông tin vừa đăng ký</h1>
+              <div>
+                <span>Tên tài khoản là: {{nguoi_dung.ten_tai_khoan}}</span>
+              </div>
+              <div>
+                <span>với Email là: {{nguoi_dung.email}}</span>
+              </div>
+              <div>
+                <span>Số điện thoại là: {{nguoi_dung.so_dien_thoai}}</span>
+              </div>
+              <div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end model đăng ký -->
